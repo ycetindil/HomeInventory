@@ -1,41 +1,57 @@
 # HomeInventory – Current State
 
+> **Repository:** `ycetindil/HomeInventory`
+> **Architecture:** Local-First, MVVM, Domain-Driven Design
+
+---
+
 ## App wiring
 - Entry: `HomeInventoryApp.swift` -> `ContentView()`
-- `ContentView` owns the screen-level state via `LocationsViewModel`
-- UI:
-  - `ContentView` -> `LocationTreeView(vm: LocationsViewModel)` (current)
-  - `AddLocationSheet` (in progress/next)
+- **Persistence Strategy:** JSON-based Disk Storage (Documents Directory).
+- **Dependency Injection:** `DiskInventoryRepository` is created in App and injected into `LocationsViewModel`.
 
-## Domain
-- `DomainModels.swift`
-  - `Location` (UUID id, parentId tree, type, sortOrder, primaryMapImageId, timestamps + soft delete)
-  - `LocationType` enum
+## Domain Models
+- `Location` (UUID, parentId, type, sortOrder, primaryMapImageId)
+- `LocationType` (House, Room, Cabinet, Drawer, etc.)
+- `Item` (UUID, locationId, name, quantity, notes)
+- `ImageStore` (Actor) - Handles saving/loading images to the "Images" folder in App Sandbox.
 
-## Data
-- Repository: `InMemoryInventoryRepository(seed: true)`
-- Seed locations: **5**
-  1) Home (house)
-  2) Kitchen (room) -> child: Cabinet A
-  3) Garage (room)
-  4) Cabinet A (cabinet) -> child: Drawer 1
-  5) Drawer 1 (drawer)
+## Data Layer
+- **Repository:** `DiskInventoryRepository.swift`
+  - Stores data in `inventory.json`.
+  - Saves a single `InventoryBackup` struct containing both `[Location]` and `[Item]`.
+  - Handles migration from old formats automatically (fallback logic).
+- **Image Storage:** `ImageStore.swift`
+  - Saves high-res photos to disk using UUID filenames.
 
 ## ViewModel
-- `LocationsViewModel` uses `@Observable` (Observation)
-  - Exposes:
-    - `locations` (computed from repo)
-    - `addLocation(...)`
-    - `childCount(of:)` (for the UI indicator)
+- `LocationsViewModel.swift` (`@Observable`)
+  - Exposes `locations` and `items` to the UI.
+  - **Logic:**
+    - `roots`: Top-level locations (e.g., House).
+    - `children(of:)`: Sub-locations (e.g., Kitchen).
+    - `items(for:)`: Items inside a specific location.
+    - `setImage(...)` / `image(for:)`: Bridges Domain to ImageStore.
 
-## UI behavior
-- Tree navigation: tap a location drills into its children (filtered by `parentId`)
-- Each row shows a right-side **count capsule** when it has children
+## UI / Features
+- **Tree Navigation:** `LocationTreeView`
+  - Acts like a file browser.
+  - Shows **Folders** (Sub-locations) and **Files** (Items) in one list.
+  - "Add Location" and "Add Item" buttons are context-aware.
+- **Detail View:** `LocationDetailView`
+  - **Visual Header:** Displays the Room Photo (or placeholder).
+  - **Photo Picker:** Native iOS picker to add/change room photos.
+  - **Items List:** Quick list of items in that room.
+- **Add Flows:**
+  - `AddLocationSheet`: Creates new containers.
+  - `Alerts`: Quick-add items via text prompt.
 
-## Rules / guardrails we’re enforcing
-- `HomeInventoryApp.swift` must not contain static test UI/data (except compile-check).
-- Seed/test data lives in repository or previews.
-- SwiftUI views only consume **domain structs** (no persistence types).
+## Architecture Guardrails
+1.  **No Core Data/SwiftData in Views:** UI consumes only pure Swift structs.
+2.  **Stable IDs:** Everything uses UUIDs.
+3.  **Local First:** All data lives in the App Sandbox (JSON + Images).
 
-## Next step
-- Add basic “+ Add Location” UI (start with adding a child under the current node).
+## Immediate Next Steps
+- **Visual Hotspots (Admin Mode):**
+  - Add tap gesture to `LocationDetailView` image.
+  - Store (x,y) coordinates relative to the image (0.0 to 1.0).

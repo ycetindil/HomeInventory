@@ -29,6 +29,13 @@ final class DiskInventoryRepository {
         save()
     }
     
+    func updateLocation(_ location: Location) {
+        if let index = locations.firstIndex(where: { $0.id == location.id }) {
+            locations[index] = location
+            save()
+        }
+    }
+    
     func deleteLocation(_ id: UUID) {
         locations.removeAll { $0.id == id }
         // Optional: Recursively delete items in this location?
