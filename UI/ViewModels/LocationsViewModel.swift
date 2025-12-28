@@ -3,12 +3,12 @@ import Observation
 
 @Observable
 final class LocationsViewModel {
-    private let repo: InMemoryInventoryRepository
+    private let repo: DiskInventoryRepository
 
-    // Flat list (still useful)
     var locations: [Location] { repo.locations }
 
-    init(repo: InMemoryInventoryRepository = InMemoryInventoryRepository()) {
+    // FIXED: Added '= DiskInventoryRepository()' to handle missing arguments
+    init(repo: DiskInventoryRepository = DiskInventoryRepository()) {
         self.repo = repo
     }
 
@@ -18,14 +18,12 @@ final class LocationsViewModel {
 
     // MARK: - Tree helpers
 
-    /// Top-level locations (no parent), sorted by sortOrder then name
     var roots: [Location] {
         locations
             .filter { $0.parentId == nil }
             .sorted(by: Self.locationSort)
     }
 
-    /// Direct children of a location, sorted by sortOrder then name
     func children(of parentId: UUID) -> [Location] {
         locations
             .filter { $0.parentId == parentId }
@@ -33,16 +31,25 @@ final class LocationsViewModel {
     }
     
     func childCount(of parentId: UUID) -> Int {
-        repo.locations.filter { $0.deletedAt == nil && $0.parentId == parentId }.count
+        locations.filter { $0.parentId == parentId }.count
     }
 
-    /// Optional convenience if you want lookups
     func location(id: UUID) -> Location? {
         locations.first(where: { $0.id == id })
     }
 
-    private static func locationSort(_ a: Location, _ b: Location) -> Bool {
+    private nonisolated static func locationSort(_ a: Location, _ b: Location) -> Bool {
         if a.sortOrder != b.sortOrder { return a.sortOrder < b.sortOrder }
         return a.name.localizedCaseInsensitiveCompare(b.name) == .orderedAscending
+    }
+    
+    // NEW: Get items that belong to a specific location
+    func items(for locationId: UUID) -> [Item] {
+        repo.items.filter { $0.locationId == locationId }
+    }
+    
+    // NEW: Add item helper
+    func addItem(name: String, parentId: UUID?) {
+        repo.addItem(name: name, locationId: parentId)
     }
 }

@@ -15,6 +15,7 @@
 		D03AF6D72F00DCA30024DEC9 /* LocationDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03AF6D62F00DC9F0024DEC9 /* LocationDetailView.swift */; };
 		D03AF6D92F00DD520024DEC9 /* LocationTreeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03AF6D82F00DD500024DEC9 /* LocationTreeView.swift */; };
 		D03AF6DB2F00DE080024DEC9 /* AddLocationSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03AF6DA2F00DE040024DEC9 /* AddLocationSheet.swift */; };
+		D03AF6DD2F01B9B60024DEC9 /* DiskInventoryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03AF6DC2F01B9B20024DEC9 /* DiskInventoryRepository.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +47,7 @@
 		D03AF6D62F00DC9F0024DEC9 /* LocationDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDetailView.swift; sourceTree = "<group>"; };
 		D03AF6D82F00DD500024DEC9 /* LocationTreeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTreeView.swift; sourceTree = "<group>"; };
 		D03AF6DA2F00DE040024DEC9 /* AddLocationSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLocationSheet.swift; sourceTree = "<group>"; };
+		D03AF6DC2F01B9B20024DEC9 /* DiskInventoryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskInventoryRepository.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -131,6 +133,7 @@
 		D03AF6C12F00A71A0024DEC9 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				D03AF6DC2F01B9B20024DEC9 /* DiskInventoryRepository.swift */,
 				D03AF6C52F00AE6C0024DEC9 /* InMemory */,
 			);
 			path = Data;
@@ -327,6 +330,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D03AF69C2F0094650024DEC9 /* ContentView.swift in Sources */,
+				D03AF6DD2F01B9B60024DEC9 /* DiskInventoryRepository.swift in Sources */,
 				D03AF6D52F00DB0A0024DEC9 /* LocationsViewModel.swift in Sources */,
 				D03AF6DB2F00DE080024DEC9 /* AddLocationSheet.swift in Sources */,
 				D03AF6CA2F00C17E0024DEC9 /* LocationListView.swift in Sources */,

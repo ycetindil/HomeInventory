@@ -2,6 +2,9 @@ import SwiftUI
 
 @main
 struct HomeInventoryApp: App {
+    // 1. Create the persistent storage ("The Brain")
+    @State private var repository = DiskInventoryRepository()
+    
     init() {
         #if DEBUG
         _domainCompileCheck()
@@ -11,6 +14,8 @@ struct HomeInventoryApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                // 2. Pass it to the ViewModel
+                .environment(LocationsViewModel(repo: repository))
         }
     }
 

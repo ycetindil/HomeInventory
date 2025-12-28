@@ -2,11 +2,13 @@ import SwiftUI
 
 struct LocationListView: View {
     let locations: [Location]
+    var vm: LocationsViewModel  // <--- 1. Add the ViewModel here
 
     var body: some View {
         List(locations) { loc in
             NavigationLink {
-                LocationDetailView(location: loc)
+                // 2. Pass it down to the Detail View
+                LocationDetailView(location: loc, vm: vm)
             } label: {
                 VStack(alignment: .leading, spacing: 4) {
                     Text(loc.name)
@@ -22,7 +24,11 @@ struct LocationListView: View {
 
 #Preview {
     NavigationStack {
-        LocationListView(locations: Location.previewLocations)
-            .navigationTitle("Locations")
+        // 3. Update Preview to provide a temporary VM
+        LocationListView(
+            locations: Location.previewLocations,
+            vm: LocationsViewModel()
+        )
+        .navigationTitle("Locations")
     }
 }

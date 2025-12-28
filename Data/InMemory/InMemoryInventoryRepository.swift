@@ -16,7 +16,7 @@ final class InMemoryInventoryRepository {
 
     private static func seedLocations() -> [Location] {
         let house = Location(name: "Home", type: .house)
-
+        
         let kitchen  = Location(parentId: house.id, name: "Kitchen", type: .room)
         let garage   = Location(parentId: house.id, name: "Garage", type: .room)
         let cabinetA = Location(parentId: kitchen.id, name: "Cabinet A", type: .cabinet)

@@ -39,6 +39,36 @@ public struct Location: Identifiable, Codable, Hashable {
     }
 }
 
+// MARK: - Item
+
+public struct Item: Identifiable, Codable, Hashable {
+    public let id: UUID
+    public var locationId: UUID? // The room/box it lives in
+    public var name: String
+    public var note: String?
+    public var quantity: Int
+    public var createdAt: Date
+    public var updatedAt: Date
+    
+    public init(
+        id: UUID = UUID(),
+        locationId: UUID? = nil,
+        name: String,
+        note: String? = nil,
+        quantity: Int = 1,
+        createdAt: Date = Date(),
+        updatedAt: Date = Date()
+    ) {
+        self.id = id
+        self.locationId = locationId
+        self.name = name
+        self.note = note
+        self.quantity = quantity
+        self.createdAt = createdAt
+        self.updatedAt = updatedAt
+    }
+}
+
 // MARK: - LocationType
 
 public enum LocationType: String, Codable, CaseIterable, Hashable {
@@ -58,7 +88,7 @@ public extension Location {
     /// Deterministic sample data for SwiftUI previews.
     static var previewLocations: [Location] {
         let house = Location(name: "Home", type: .house)
-
+        
         let kitchen  = Location(parentId: house.id, name: "Kitchen", type: .room)
         let garage   = Location(parentId: house.id, name: "Garage", type: .room)
         let cabinetA = Location(parentId: kitchen.id, name: "Cabinet A", type: .cabinet)
