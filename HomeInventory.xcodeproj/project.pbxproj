@@ -6,6 +6,17 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		D03AF69C2F0094650024DEC9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03AF69B2F0094650024DEC9 /* ContentView.swift */; };
+		D03AF6C42F00A9E70024DEC9 /* DomainModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03AF6C32F00A7480024DEC9 /* DomainModels.swift */; };
+		D03AF6C72F00AEB80024DEC9 /* InMemoryInventoryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03AF6C62F00AE7E0024DEC9 /* InMemoryInventoryRepository.swift */; };
+		D03AF6CA2F00C17E0024DEC9 /* LocationListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03AF6C92F00C0610024DEC9 /* LocationListView.swift */; };
+		D03AF6D52F00DB0A0024DEC9 /* LocationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03AF6D42F00DB050024DEC9 /* LocationsViewModel.swift */; };
+		D03AF6D72F00DCA30024DEC9 /* LocationDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03AF6D62F00DC9F0024DEC9 /* LocationDetailView.swift */; };
+		D03AF6D92F00DD520024DEC9 /* LocationTreeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03AF6D82F00DD500024DEC9 /* LocationTreeView.swift */; };
+		D03AF6DB2F00DE080024DEC9 /* AddLocationSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03AF6DA2F00DE040024DEC9 /* AddLocationSheet.swift */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		D03AF6A42F0094670024DEC9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -25,8 +36,16 @@
 
 /* Begin PBXFileReference section */
 		D03AF6962F0094650024DEC9 /* HomeInventory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HomeInventory.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D03AF69B2F0094650024DEC9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		D03AF6A32F0094670024DEC9 /* HomeInventoryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HomeInventoryTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D03AF6AD2F0094670024DEC9 /* HomeInventoryUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HomeInventoryUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D03AF6C32F00A7480024DEC9 /* DomainModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DomainModels.swift; sourceTree = "<group>"; };
+		D03AF6C62F00AE7E0024DEC9 /* InMemoryInventoryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemoryInventoryRepository.swift; sourceTree = "<group>"; };
+		D03AF6C92F00C0610024DEC9 /* LocationListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationListView.swift; sourceTree = "<group>"; };
+		D03AF6D42F00DB050024DEC9 /* LocationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsViewModel.swift; sourceTree = "<group>"; };
+		D03AF6D62F00DC9F0024DEC9 /* LocationDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDetailView.swift; sourceTree = "<group>"; };
+		D03AF6D82F00DD500024DEC9 /* LocationTreeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTreeView.swift; sourceTree = "<group>"; };
+		D03AF6DA2F00DE040024DEC9 /* AddLocationSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLocationSheet.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -43,6 +62,11 @@
 		D03AF6B02F0094670024DEC9 /* HomeInventoryUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = HomeInventoryUITests;
+			sourceTree = "<group>";
+		};
+		D03AF6CB2F00D9980024DEC9 /* Docs */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Docs;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -75,6 +99,10 @@
 		D03AF68D2F0094650024DEC9 = {
 			isa = PBXGroup;
 			children = (
+				D03AF6CB2F00D9980024DEC9 /* Docs */,
+				D03AF6C22F00A7220024DEC9 /* UI */,
+				D03AF6C12F00A71A0024DEC9 /* Data */,
+				D03AF6C02F00A70E0024DEC9 /* Domain */,
 				D03AF6982F0094650024DEC9 /* HomeInventory */,
 				D03AF6A62F0094670024DEC9 /* HomeInventoryTests */,
 				D03AF6B02F0094670024DEC9 /* HomeInventoryUITests */,
@@ -90,6 +118,67 @@
 				D03AF6AD2F0094670024DEC9 /* HomeInventoryUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		D03AF6C02F00A70E0024DEC9 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				D03AF6C32F00A7480024DEC9 /* DomainModels.swift */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		D03AF6C12F00A71A0024DEC9 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				D03AF6C52F00AE6C0024DEC9 /* InMemory */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		D03AF6C22F00A7220024DEC9 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				D03AF6DA2F00DE040024DEC9 /* AddLocationSheet.swift */,
+				D03AF6D32F00DAF50024DEC9 /* Screens */,
+				D03AF6D22F00DAEC0024DEC9 /* ViewModels */,
+				D03AF6C82F00C05B0024DEC9 /* View */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		D03AF6C52F00AE6C0024DEC9 /* InMemory */ = {
+			isa = PBXGroup;
+			children = (
+				D03AF6C62F00AE7E0024DEC9 /* InMemoryInventoryRepository.swift */,
+			);
+			path = InMemory;
+			sourceTree = "<group>";
+		};
+		D03AF6C82F00C05B0024DEC9 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D03AF6D82F00DD500024DEC9 /* LocationTreeView.swift */,
+				D03AF6D62F00DC9F0024DEC9 /* LocationDetailView.swift */,
+				D03AF69B2F0094650024DEC9 /* ContentView.swift */,
+				D03AF6C92F00C0610024DEC9 /* LocationListView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		D03AF6D22F00DAEC0024DEC9 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				D03AF6D42F00DB050024DEC9 /* LocationsViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		D03AF6D32F00DAF50024DEC9 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Screens;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -109,6 +198,7 @@
 			);
 			fileSystemSynchronizedGroups = (
 				D03AF6982F0094650024DEC9 /* HomeInventory */,
+				D03AF6CB2F00D9980024DEC9 /* Docs */,
 			);
 			name = HomeInventory;
 			packageProductDependencies = (
@@ -236,6 +326,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D03AF69C2F0094650024DEC9 /* ContentView.swift in Sources */,
+				D03AF6D52F00DB0A0024DEC9 /* LocationsViewModel.swift in Sources */,
+				D03AF6DB2F00DE080024DEC9 /* AddLocationSheet.swift in Sources */,
+				D03AF6CA2F00C17E0024DEC9 /* LocationListView.swift in Sources */,
+				D03AF6D72F00DCA30024DEC9 /* LocationDetailView.swift in Sources */,
+				D03AF6D92F00DD520024DEC9 /* LocationTreeView.swift in Sources */,
+				D03AF6C72F00AEB80024DEC9 /* InMemoryInventoryRepository.swift in Sources */,
+				D03AF6C42F00A9E70024DEC9 /* DomainModels.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
