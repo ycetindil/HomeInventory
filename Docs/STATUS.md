@@ -14,37 +14,37 @@
 - `Location` (UUID, parentId, type, sortOrder, primaryMapImageId)
 - `LocationType` (House, Room, Cabinet, Drawer, etc.)
 - `Item` (UUID, locationId, name, quantity, notes)
+- `Hotspot` (UUID, mapImageId, targetLocationId, x, y, label)
 - `ImageStore` (Actor) - Handles saving/loading images to the "Images" folder in App Sandbox.
 
 ## Data Layer
 - **Repository:** `DiskInventoryRepository.swift`
   - Stores data in `inventory.json`.
-  - Saves a single `InventoryBackup` struct containing both `[Location]` and `[Item]`.
+  - Saves a single `InventoryBackup` struct containing `[Location]`, `[Item]`, and `[Hotspot]`.
   - Handles migration from old formats automatically (fallback logic).
 - **Image Storage:** `ImageStore.swift`
   - Saves high-res photos to disk using UUID filenames.
 
 ## ViewModel
 - `LocationsViewModel.swift` (`@Observable`)
-  - Exposes `locations` and `items` to the UI.
+  - Exposes `locations`, `items`, and `hotspots` to the UI.
   - **Logic:**
     - `roots`: Top-level locations (e.g., House).
     - `children(of:)`: Sub-locations (e.g., Kitchen).
     - `items(for:)`: Items inside a specific location.
-    - `setImage(...)` / `image(for:)`: Bridges Domain to ImageStore.
+    - `setImage(...)` / `image(for:)`: Bridges Domain to ImageStore with MainActor safety.
+    - `addHotspot(...)`: Creates visual links between photos and locations.
 
 ## UI / Features
-- **Tree Navigation:** `LocationTreeView`
-  - Acts like a file browser.
-  - Shows **Folders** (Sub-locations) and **Files** (Items) in one list.
-  - "Add Location" and "Add Item" buttons are context-aware.
-- **Detail View:** `LocationDetailView`
-  - **Visual Header:** Displays the Room Photo (or placeholder).
-  - **Photo Picker:** Native iOS picker to add/change room photos.
-  - **Items List:** Quick list of items in that room.
+- **Unified Navigation:** `LocationView.swift` (Formerly LocationTreeView)
+  - Acts as the single source of truth for navigation.
+  - **Visual Header:** Displays Room Photo with interactive Hotspots.
+  - **Admin Mode:** "Edit Map" button allows tapping photo to create new sub-locations.
+  - **Recursive Tree:** Handles deep navigation through folders (Sub-locations) and Files (Items).
 - **Add Flows:**
   - `AddLocationSheet`: Creates new containers.
   - `Alerts`: Quick-add items via text prompt.
+  - `Hotspot Alert`: Captures (x,y) and names a new location in one step.
 
 ## Architecture Guardrails
 1.  **No Core Data/SwiftData in Views:** UI consumes only pure Swift structs.
@@ -52,6 +52,5 @@
 3.  **Local First:** All data lives in the App Sandbox (JSON + Images).
 
 ## Immediate Next Steps
-- **Visual Hotspots (Admin Mode):**
-  - Add tap gesture to `LocationDetailView` image.
-  - Store (x,y) coordinates relative to the image (0.0 to 1.0).
+- **Search:** Implement global item search.
+- **Polish:** Add breadcrumbs and swipe actions.

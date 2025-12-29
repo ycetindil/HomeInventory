@@ -69,6 +69,26 @@ public struct Item: Identifiable, Codable, Hashable {
     }
 }
 
+// MARK: - Hotspot
+
+public struct Hotspot: Identifiable, Codable, Hashable, Sendable {
+    public let id: UUID
+    public let mapImageId: UUID       // The ID of the image this hotspot belongs to
+    public let targetLocationId: UUID // The ID of the Location this hotspot links to
+    public let x: Double              // Normalized X position (0.0 - 1.0)
+    public let y: Double              // Normalized Y position (0.0 - 1.0)
+    public let label: String?         // Optional text
+    
+    public init(id: UUID = UUID(), mapImageId: UUID, targetLocationId: UUID, x: Double, y: Double, label: String? = nil) {
+        self.id = id
+        self.mapImageId = mapImageId
+        self.targetLocationId = targetLocationId
+        self.x = x
+        self.y = y
+        self.label = label
+    }
+}
+
 // MARK: - LocationType
 
 public enum LocationType: String, Codable, CaseIterable, Hashable {

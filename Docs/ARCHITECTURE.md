@@ -9,8 +9,9 @@
 ## 1. UX Strategy
 1.  **The "Quick Add" Rule:** Avoid "tax form" data entry. Allow creating an Item + Type in one go.
 2.  **Visual Map:**
-    - MVP: Tappable "Dots" (Hotspots) on a Room Photo.
-    - Hotspots use normalized coordinates (0.0 to 1.0) so they work on any screen size.
+    - **Hotspots:** Tappable "Dots" on a Room Photo.
+    - **Normalization:** Coordinates stored as (0.0 to 1.0) to support any screen size.
+    - **Interactive:** Tapping a dot navigates recursively into that location.
 3.  **File Management:**
     - Photos/PDFs live in App Sandbox (Documents/Images).
     - Database (`inventory.json`) only stores the filename/UUID reference.
@@ -25,11 +26,12 @@
 
 **2. Data Layer (`DiskInventoryRepository.swift`)**
 - **Single Source of Truth:** One JSON file (`inventory.json`) loaded into memory.
-- **Auto-Migration:** Fallback logic in `init()` to handle schema changes (e.g., adding Hotspots).
+- **Auto-Migration:** Fallback logic in `init()` to handle schema changes.
 - **ImageStore:** Actor-isolated class handling writing/reading UIImages to disk.
 
 **3. UI Layer (SwiftUI)**
 - **MVVM:** `LocationsViewModel` holds the `repo` and exposes data.
+- **Unified View:** `LocationView` handles both tree navigation and visual mapping.
 - **No Logic in Views:** Views only present data and call VM functions.
 
 ---
@@ -39,8 +41,6 @@
 ### Core Entities (Implemented)
 * **Location:** `id`, `parentId?`, `name`, `type`, `primaryMapImageId?`
 * **Item:** `id`, `locationId?`, `name`, `quantity`, `note`
-
-### Visuals (In Progress)
 * **Hotspot:** `id`, `mapImageId`, `targetLocationId`, `x`, `y` (0-1), `label`
 
 ### Future Entities (Not Implemented Yet)
@@ -57,13 +57,13 @@
 - Recursive Tree Navigation.
 - Image Saving (ImageStore).
 
-**Phase 2: Visual Navigation (🚧 Current)**
-- [ ] Add `Hotspot` struct to `DomainModels`.
-- [ ] Update Repository to save `[Hotspot]`.
-- [ ] UI: "Edit Mode" overlay on Room Photo to tap-and-add dots.
-- [ ] Interaction: Tapping a dot navigates to that Location.
+**Phase 2: Visual Navigation (✅ Done)**
+- `Hotspot` struct added to `DomainModels`.
+- Repository saves `[Hotspot]`.
+- "Edit Mode" allows creating new Locations via Tap.
+- Visual navigation fully integrated into `LocationView`.
 
-**Phase 3: Refinement**
+**Phase 3: Refinement (🚧 Next)**
 - [ ] Search Bar.
 - [ ] Swipe-to-delete Items.
 - [ ] Move Item (Change `locationId`).

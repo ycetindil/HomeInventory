@@ -68,3 +68,14 @@ My Workflow:
 
 Action:
 Please read the files above, then summarize the current status of the project and identifying the specific task we are supposed to work on next according to the Roadmap.
+Act as my Architect. Define the specs and the interface changes required. I can then take these specific blocks to Cursor to implement them. Do not try to give me the code here.
+
+## 4. Finishing the Session up
+
+Before finishing up for the day please:
+1. Give me a title for this chat
+2. Updated STATUS.md
+3. Updated ROADMAP.md
+4. Updated ARCHITECTURE.md
+if there is any changes to them. I am attaching their current files here.
+5. Give me a commit message for pushing the changes to GitHub

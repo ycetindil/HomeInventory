@@ -10,13 +10,12 @@
 		D03AF69C2F0094650024DEC9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03AF69B2F0094650024DEC9 /* ContentView.swift */; };
 		D03AF6C42F00A9E70024DEC9 /* DomainModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03AF6C32F00A7480024DEC9 /* DomainModels.swift */; };
 		D03AF6C72F00AEB80024DEC9 /* InMemoryInventoryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03AF6C62F00AE7E0024DEC9 /* InMemoryInventoryRepository.swift */; };
-		D03AF6CA2F00C17E0024DEC9 /* LocationListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03AF6C92F00C0610024DEC9 /* LocationListView.swift */; };
 		D03AF6D52F00DB0A0024DEC9 /* LocationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03AF6D42F00DB050024DEC9 /* LocationsViewModel.swift */; };
-		D03AF6D72F00DCA30024DEC9 /* LocationDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03AF6D62F00DC9F0024DEC9 /* LocationDetailView.swift */; };
-		D03AF6D92F00DD520024DEC9 /* LocationTreeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03AF6D82F00DD500024DEC9 /* LocationTreeView.swift */; };
+		D03AF6D92F00DD520024DEC9 /* LocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03AF6D82F00DD500024DEC9 /* LocationView.swift */; };
 		D03AF6DB2F00DE080024DEC9 /* AddLocationSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03AF6DA2F00DE040024DEC9 /* AddLocationSheet.swift */; };
 		D03AF6DD2F01B9B60024DEC9 /* DiskInventoryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03AF6DC2F01B9B20024DEC9 /* DiskInventoryRepository.swift */; };
 		D03AF6DF2F01C9BF0024DEC9 /* ImageStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03AF6DE2F01C9BC0024DEC9 /* ImageStore.swift */; };
+		D03AF6E12F0243000024DEC9 /* HotspotImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03AF6E02F0242FC0024DEC9 /* HotspotImageView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,13 +42,12 @@
 		D03AF6AD2F0094670024DEC9 /* HomeInventoryUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HomeInventoryUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D03AF6C32F00A7480024DEC9 /* DomainModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DomainModels.swift; sourceTree = "<group>"; };
 		D03AF6C62F00AE7E0024DEC9 /* InMemoryInventoryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemoryInventoryRepository.swift; sourceTree = "<group>"; };
-		D03AF6C92F00C0610024DEC9 /* LocationListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationListView.swift; sourceTree = "<group>"; };
 		D03AF6D42F00DB050024DEC9 /* LocationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsViewModel.swift; sourceTree = "<group>"; };
-		D03AF6D62F00DC9F0024DEC9 /* LocationDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDetailView.swift; sourceTree = "<group>"; };
-		D03AF6D82F00DD500024DEC9 /* LocationTreeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTreeView.swift; sourceTree = "<group>"; };
+		D03AF6D82F00DD500024DEC9 /* LocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationView.swift; sourceTree = "<group>"; };
 		D03AF6DA2F00DE040024DEC9 /* AddLocationSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLocationSheet.swift; sourceTree = "<group>"; };
 		D03AF6DC2F01B9B20024DEC9 /* DiskInventoryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskInventoryRepository.swift; sourceTree = "<group>"; };
 		D03AF6DE2F01C9BC0024DEC9 /* ImageStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageStore.swift; sourceTree = "<group>"; };
+		D03AF6E02F0242FC0024DEC9 /* HotspotImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotspotImageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -145,6 +143,7 @@
 		D03AF6C22F00A7220024DEC9 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				D03AF6E42F0242150024DEC9 /* Components */,
 				D03AF6DA2F00DE040024DEC9 /* AddLocationSheet.swift */,
 				D03AF6D32F00DAF50024DEC9 /* Screens */,
 				D03AF6D22F00DAEC0024DEC9 /* ViewModels */,
@@ -156,10 +155,8 @@
 		D03AF6C82F00C05B0024DEC9 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				D03AF6D82F00DD500024DEC9 /* LocationTreeView.swift */,
-				D03AF6D62F00DC9F0024DEC9 /* LocationDetailView.swift */,
+				D03AF6D82F00DD500024DEC9 /* LocationView.swift */,
 				D03AF69B2F0094650024DEC9 /* ContentView.swift */,
-				D03AF6C92F00C0610024DEC9 /* LocationListView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -177,6 +174,14 @@
 			children = (
 			);
 			path = Screens;
+			sourceTree = "<group>";
+		};
+		D03AF6E42F0242150024DEC9 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				D03AF6E02F0242FC0024DEC9 /* HotspotImageView.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -329,11 +334,10 @@
 				D03AF6DD2F01B9B60024DEC9 /* DiskInventoryRepository.swift in Sources */,
 				D03AF6D52F00DB0A0024DEC9 /* LocationsViewModel.swift in Sources */,
 				D03AF6DB2F00DE080024DEC9 /* AddLocationSheet.swift in Sources */,
-				D03AF6CA2F00C17E0024DEC9 /* LocationListView.swift in Sources */,
-				D03AF6D72F00DCA30024DEC9 /* LocationDetailView.swift in Sources */,
-				D03AF6D92F00DD520024DEC9 /* LocationTreeView.swift in Sources */,
+				D03AF6D92F00DD520024DEC9 /* LocationView.swift in Sources */,
 				D03AF6C72F00AEB80024DEC9 /* InMemoryInventoryRepository.swift in Sources */,
 				D03AF6C42F00A9E70024DEC9 /* DomainModels.swift in Sources */,
+				D03AF6E12F0243000024DEC9 /* HotspotImageView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

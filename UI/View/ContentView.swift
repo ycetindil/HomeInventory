@@ -1,11 +1,11 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var vm = LocationsViewModel()
+    @Environment(LocationsViewModel.self) private var vm
 
     var body: some View {
         NavigationStack {
-            LocationTreeView(vm: vm, parent: nil)
+            LocationView(vm: vm, parent: nil)
                 .navigationTitle("Locations")
         }
     }
@@ -13,4 +13,5 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
+        .environment(LocationsViewModel())
 }
