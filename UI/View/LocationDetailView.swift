@@ -5,20 +5,21 @@ struct LocationDetailView: View {
     let location: Location
     var vm: LocationsViewModel
     
+    // State for the photo picker and "Add Item" alert
+    @State private var selectedItem: PhotosPickerItem?
     @State private var showingAddItem = false
     @State private var newItemName = ""
     
-    // Photo Picker State
-    @State private var selectedItem: PhotosPickerItem?
-    
+    // Fetch items dynamically
     var items: [Item] {
         vm.items(for: location.id)
     }
 
     var body: some View {
         List {
-            // SECTION 1: The "Map" (Photo)
+            // --- SECTION 1: The Photo (Map) ---
             Section {
+                // A. Show the Image (or placeholder)
                 if let image = vm.image(for: location) {
                     Image(uiImage: image)
                         .resizable()
@@ -29,17 +30,23 @@ struct LocationDetailView: View {
                 } else {
                     ContentUnavailableView("No Room Photo", systemImage: "camera")
                         .frame(height: 150)
+                        .foregroundStyle(.secondary)
                 }
                 
-                // The Button to Pick/Change Photo
+                // B. The Button to Add/Change Photo
                 PhotosPicker(selection: $selectedItem, matching: .images) {
-                    Label(location.primaryMapImageId == nil ? "Add Photo" : "Change Photo", systemImage: "photo")
-                        .frame(maxWidth: .infinity)
+                    Label(
+                        location.primaryMapImageId == nil ? "Add Photo" : "Change Photo",
+                        systemImage: "photo.badge.plus"
+                    )
+                    .frame(maxWidth: .infinity)
+                    .fontWeight(.semibold)
                 }
                 .onChange(of: selectedItem) { _, newItem in
                     Task {
                         if let data = try? await newItem?.loadTransferable(type: Data.self),
                            let uiImage = UIImage(data: data) {
+                            // Save the image to the VM
                             vm.setImage(uiImage, for: location.id)
                         }
                     }
@@ -48,17 +55,18 @@ struct LocationDetailView: View {
                 Text("Room Map")
             }
 
-            // SECTION 2: Items
+            // --- SECTION 2: The Items ---
             Section("Items in \(location.name)") {
                 if items.isEmpty {
                     Text("No items here yet.")
-                        .foregroundStyle(.secondary)
                         .italic()
+                        .foregroundStyle(.secondary)
                 }
                 
                 ForEach(items) { item in
                     HStack {
-                        Image(systemName: "tag.fill").foregroundStyle(.orange)
+                        Image(systemName: "tag.fill")
+                            .foregroundStyle(.orange)
                         Text(item.name)
                     }
                 }
@@ -67,21 +75,13 @@ struct LocationDetailView: View {
                     newItemName = ""
                     showingAddItem = true
                 } label: {
-                    Label("Quick Add Item", systemImage: "plus.circle.fill")
-                }
-            }
-            
-            // SECTION 3: Metadata
-            Section("Details") {
-                HStack {
-                    Text("Type")
-                    Spacer()
-                    Text(location.type.rawValue.capitalized)
-                        .foregroundStyle(.secondary)
+                    Label("Quick Add Item", systemImage: "plus")
+                        .foregroundStyle(.blue)
                 }
             }
         }
         .navigationTitle(location.name)
+        // Popup for adding items
         .alert("Add Item", isPresented: $showingAddItem) {
             TextField("Item Name", text: $newItemName)
             Button("Cancel", role: .cancel) { }

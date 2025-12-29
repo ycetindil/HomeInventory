@@ -1,16 +1,67 @@
 import SwiftUI
+import PhotosUI // <--- Required for the picker
 
 struct LocationTreeView: View {
     let vm: LocationsViewModel
     let parent: Location?   // nil = roots
     
+    // State for Adding Sub-locations and Items
     @State private var showingAddLocation = false
     @State private var showingAddItem = false
     @State private var newItemName = ""
     
+    // State for Photo Picker
+    @State private var selectedPhoto: PhotosPickerItem?
+    
     var body: some View {
         List {
-            // SECTION 1: Sub-Locations (The "Folders")
+            // --- SECTION 0: ROOM PHOTO (Only if we are inside a location) ---
+            if let currentLoc = parent {
+                Section {
+                    // 1. The Image
+                    if let image = vm.image(for: currentLoc) {
+                        Image(uiImage: image)
+                            .resizable()
+                            .scaledToFill()
+                            .frame(height: 200)
+                            .listRowInsets(EdgeInsets())
+                            .clipped()
+                    } else {
+                        // Placeholder
+                        HStack {
+                            Spacer()
+                            VStack {
+                                Image(systemName: "camera")
+                                    .font(.title)
+                                Text("No Room Photo")
+                                    .font(.caption)
+                            }
+                            .foregroundStyle(.secondary)
+                            .frame(height: 100)
+                            Spacer()
+                        }
+                    }
+                    
+                    // 2. The Picker Button
+                    PhotosPicker(selection: $selectedPhoto, matching: .images) {
+                        Label(currentLoc.primaryMapImageId == nil ? "Add Photo" : "Change Photo", systemImage: "photo")
+                            .frame(maxWidth: .infinity)
+                    }
+                    .buttonStyle(.borderless) // Fixes clickability in List
+                    .onChange(of: selectedPhoto) { _, newItem in
+                        Task {
+                            if let data = try? await newItem?.loadTransferable(type: Data.self),
+                               let uiImage = UIImage(data: data) {
+                                vm.setImage(uiImage, for: currentLoc.id)
+                            }
+                        }
+                    }
+                } header: {
+                    Text("Room Map")
+                }
+            }
+            
+            // --- SECTION 1: SUB-LOCATIONS (The "Folders") ---
             Section("Locations") {
                 let subLocations = (parent == nil)
                     ? vm.roots
@@ -24,7 +75,6 @@ struct LocationTreeView: View {
                 
                 ForEach(subLocations) { loc in
                     NavigationLink {
-                        // Recursive: Go deeper into the tree
                         LocationTreeView(vm: vm, parent: loc)
                             .navigationTitle(loc.name)
                     } label: {
@@ -34,7 +84,6 @@ struct LocationTreeView: View {
                                 Text(loc.type.rawValue).font(.caption).foregroundStyle(.secondary)
                             }
                             Spacer()
-                            // Show count of children inside
                             let count = vm.childCount(of: loc.id)
                             if count > 0 {
                                 Text("\(count)")
@@ -49,7 +98,7 @@ struct LocationTreeView: View {
                 }
             }
             
-            // SECTION 2: Items (The "Files") - Only show if we are inside a location
+            // --- SECTION 2: ITEMS (The "Files") ---
             if let parentLocation = parent {
                 Section("Items") {
                     let items = vm.items(for: parentLocation.id)
@@ -68,7 +117,6 @@ struct LocationTreeView: View {
                         }
                     }
                     
-                    // Quick Add Item Button
                     Button {
                         newItemName = ""
                         showingAddItem = true
@@ -78,7 +126,7 @@ struct LocationTreeView: View {
                 }
             }
         }
-        // Toolbar with "Add Location" (+ icon)
+        // Toolbar
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Button {
@@ -88,11 +136,11 @@ struct LocationTreeView: View {
                 }
             }
         }
-        // Sheet for adding Sub-Locations
+        // Sheet: Add Location
         .sheet(isPresented: $showingAddLocation) {
             AddLocationSheet(vm: vm, parent: parent)
         }
-        // Popup for adding Items
+        // Alert: Add Item
         .alert("Add Item", isPresented: $showingAddItem) {
             TextField("Item Name", text: $newItemName)
             Button("Cancel", role: .cancel) { }
@@ -104,12 +152,5 @@ struct LocationTreeView: View {
         } message: {
             Text("What is stored in \(parent?.name ?? "this location")?")
         }
-    }
-}
-
-#Preview {
-    NavigationStack {
-        LocationTreeView(vm: LocationsViewModel(), parent: nil)
-            .navigationTitle("Home Inventory")
     }
 }
