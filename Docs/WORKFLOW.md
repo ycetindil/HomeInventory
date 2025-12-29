@@ -52,14 +52,14 @@ We use three distinct systems to build this software. Respecting these roles pre
 
 ```text
 I am working on an iOS app called "HomeInventory". It is a local-first, SwiftUI app using MVVM and JSON persistence (no Core Data).
-My repository is: ycetindil/HomeInventory (I have granted you access/connected it).
+My public repository is https://github.com/ycetindil/HomeInventory.
 
 Please initialize your context by reading the following 4 files from my repo:
 
-1. `.cursorrules` (Defines our tech stack, constraints, and coding style).
-2. `Docs/ARCHITECTURE.md` (Explains the "Why", data models, and domain boundaries).
-3. `Docs/STATUS.md` (Current state of the code and recent changes).
-4. `Docs/ROADMAP.md` (Our backlog and immediate next steps).
+1. `.cursorrules: https://raw.githubusercontent.com/ycetindil/HomeInventory/refs/heads/main/.cursorrules` (Defines our tech stack, constraints, and coding style).
+2. `Docs/ARCHITECTURE.md: https://raw.githubusercontent.com/ycetindil/HomeInventory/refs/heads/main/Docs/ARCHITECTURE.md` (Explains the "Why", data models, and domain boundaries).
+3. `Docs/STATUS.md: https://raw.githubusercontent.com/ycetindil/HomeInventory/refs/heads/main/Docs/STATUS.md` (Current state of the code and recent changes).
+4. `Docs/ROADMAP.md: https://raw.githubusercontent.com/ycetindil/HomeInventory/refs/heads/main/Docs/ROADMAP.md` (Our backlog and immediate next steps).
 
 My Workflow:
 1. I will discuss architecture and logic with you here.
