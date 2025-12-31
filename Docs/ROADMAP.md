@@ -1,4 +1,4 @@
-# HomeInventory Roadmap
+# HomeInventory - ROADMAP
 
 ## Phase 1: Foundation (✅ Done)
 - [x] **Project Setup:** SwiftUI + MVVM structure.
@@ -15,13 +15,13 @@
 - [x] **Coordinate Capture:** Tap gesture to save (x, y) relative to image size.
 - [x] **Navigation Linking:** Tap a hotspot -> Navigate to the target Location.
 
-## Phase 3: Polish & Search (🚧 Next Up)
-- [ ] **Search Bar:** Global search for Items (find "Passport" -> shows "Drawer A").
-- [ ] **Breadcrumbs:** Show path `Kitchen > Cabinet > Shelf` in Detail View.
-- [ ] **Item Management:** Edit/Delete items (Swipe actions).
-- [ ] **Location Management:** Edit/Delete/Move locations.
+## Phase 3: Polish & Search (✅ Done)
+- [x] **Search Bar:** Global search for Items (find "Passport" -> shows "Drawer A").
+- [x] **Breadcrumbs:** Show path `Kitchen > Cabinet > Shelf` in Detail View.
+- [x] **Item Management:** Edit/Delete items (Swipe/Tap actions).
+- [x] **Location Management:** Edit/Delete/Move locations.
 
-## Phase 4: Advanced Features (Future)
-- [ ] **QR Codes:** Generate QR codes for boxes to deep-link to content.
+## Phase 4: Advanced Features (🚧 Next Up)
 - [ ] **Export:** Export Inventory as CSV/PDF.
+- [ ] **QR Codes:** Generate QR codes for boxes to deep-link to content.
 - [ ] **Cloud Sync:** (Maybe?) Google Drive / iCloud Backup of the JSON file.

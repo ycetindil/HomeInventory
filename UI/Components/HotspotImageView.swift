@@ -5,7 +5,7 @@ struct HotspotImageView: View {
     let hotspots: [Hotspot]
     let isEditing: Bool
     let onAddHotspot: (Double, Double) -> Void
-    let onSelectHotspot: (Hotspot) -> Void
+    let locationForHotspot: (UUID) -> Location?
     
     var body: some View {
         GeometryReader { geometry in
@@ -46,20 +46,34 @@ struct HotspotImageView: View {
                 
                 // Hotspot Overlays (rendered on top, so their gestures take priority)
                 ForEach(hotspots) { hotspot in
-                    Circle()
-                        .fill(Color.blue)
-                        .frame(width: 20, height: 20)
-                        .overlay(
+                    if let targetLocation = locationForHotspot(hotspot.targetLocationId) {
+                        NavigationLink(value: targetLocation) {
                             Circle()
-                                .stroke(Color.white, lineWidth: 2)
-                        )
+                                .fill(Color.blue)
+                                .frame(width: 20, height: 20)
+                                .overlay(
+                                    Circle()
+                                        .stroke(Color.white, lineWidth: 2)
+                                )
+                        }
+                        .buttonStyle(.plain)
                         .position(
                             x: CGFloat(hotspot.x) * geometry.size.width,
                             y: CGFloat(hotspot.y) * geometry.size.height
                         )
-                        .onTapGesture {
-                            onSelectHotspot(hotspot)
-                        }
+                    } else {
+                        Circle()
+                            .fill(Color.gray)
+                            .frame(width: 20, height: 20)
+                            .overlay(
+                                Circle()
+                                    .stroke(Color.white, lineWidth: 2)
+                            )
+                            .position(
+                                x: CGFloat(hotspot.x) * geometry.size.width,
+                                y: CGFloat(hotspot.y) * geometry.size.height
+                            )
+                    }
                 }
             }
         }

@@ -55,6 +55,13 @@ final class DiskInventoryRepository {
         save(hotspots: hotspots)
     }
     
+    func updateItem(_ item: Item) {
+        if let index = items.firstIndex(where: { $0.id == item.id }) {
+            items[index] = item
+            save(hotspots: hotspots)
+        }
+    }
+    
     func deleteItem(_ id: UUID) {
         items.removeAll { $0.id == id }
         save(hotspots: hotspots)

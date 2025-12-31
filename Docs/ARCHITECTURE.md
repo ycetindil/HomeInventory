@@ -1,4 +1,4 @@
-# Home Inventory App — Architecture
+# Home Inventory App — ARCHITECTURE
 
 > **Purpose:** iPhone-first, visual-first home inventory.
 > **Core Loop:** Room Photo -> Tap Hotspot -> See Items.
@@ -31,7 +31,8 @@
 
 **3. UI Layer (SwiftUI)**
 - **MVVM:** `LocationsViewModel` holds the `repo` and exposes data.
-- **Unified View:** `LocationView` handles both tree navigation and visual mapping.
+- **Unified View:** `LocationView` handles tree navigation, search, and visual mapping.
+- **Components:** Reusable UI pieces (`BreadcrumbView`, `LocationPicker`) separate from Screens.
 - **No Logic in Views:** Views only present data and call VM functions.
 
 ---
@@ -63,11 +64,11 @@
 - "Edit Mode" allows creating new Locations via Tap.
 - Visual navigation fully integrated into `LocationView`.
 
-**Phase 3: Refinement (🚧 Next)**
-- [ ] Search Bar.
-- [ ] Swipe-to-delete Items.
-- [ ] Move Item (Change `locationId`).
+**Phase 3: Refinement (✅ Done)**
+- Search Bar (Global).
+- Breadcrumbs.
+- Move/Duplicate/Delete workflows for Items and Locations.
 
-**Phase 4: Advanced**
+**Phase 4: Advanced (🚧 Next)**
 - [ ] Export to ZIP (JSON + Images).
 - [ ] QR Code generation.

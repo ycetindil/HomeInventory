@@ -1,0 +1,22 @@
+# --- Xcode / Apple noise ---
+**/DerivedData/**
+**/.build/**
+**/Build/**
+**/*.xcuserstate
+
+# User-specific Xcode data (huge + irrelevant)
+**/*.xcworkspace/xcuserdata/**
+**/*.xcodeproj/xcuserdata/**
+**/*.xcodeproj/project.xcworkspace/xcuserdata/**
+
+# SwiftPM / dependency managers (if present)
+**/.swiftpm/**
+**/Pods/**
+**/Carthage/**
+
+# --- Git / tooling ---
+**/.git/**
+**/.DS_Store
+
+# --- Logs / misc ---
+**/*.log

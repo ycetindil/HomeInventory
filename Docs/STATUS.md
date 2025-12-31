@@ -1,4 +1,4 @@
-# HomeInventory – Current State
+# HomeInventory – STATUS
 
 > **Repository:** `ycetindil/HomeInventory`
 > **Architecture:** Local-First, MVVM, Domain-Driven Design
@@ -32,19 +32,25 @@
     - `roots`: Top-level locations (e.g., House).
     - `children(of:)`: Sub-locations (e.g., Kitchen).
     - `items(for:)`: Items inside a specific location.
-    - `setImage(...)` / `image(for:)`: Bridges Domain to ImageStore with MainActor safety.
-    - `addHotspot(...)`: Creates visual links between photos and locations.
+    - `searchResults`: Real-time filtered list of items based on search query.
+    - `breadcrumbPath(for:)`: Computes navigation path to root.
+    - `moveItem`/`moveLocation`: Handles reparenting with circular dependency checks.
+    - `deleteLocationRecursive`: Cascading delete for folders and contents.
 
 ## UI / Features
-- **Unified Navigation:** `LocationView.swift` (Formerly LocationTreeView)
-  - Acts as the single source of truth for navigation.
-  - **Visual Header:** Displays Room Photo with interactive Hotspots.
-  - **Admin Mode:** "Edit Map" button allows tapping photo to create new sub-locations.
-  - **Recursive Tree:** Handles deep navigation through folders (Sub-locations) and Files (Items).
+- **Unified Navigation:** `LocationView.swift`
+  - **Search:** Global item search via `searchable`.
+  - **Breadcrumbs:** Navigation path header (`BreadcrumbView`) for easy traversal.
+  - **Visual Header:** Interactive Room Photo with Hotspots.
+- **Item Management:**
+  - **Edit:** "Tap to Edit" pattern (opens `ItemDetailView` in edit mode).
+  - **Actions:** Swipe/Context Menu to **Move**, **Duplicate**, or **Delete** (with confirmation).
+- **Location Management:**
+  - **Drill Down:** Tapping a location navigates inside.
+  - **Settings:** "Edit" button opens settings to Rename, Move (Picker), or Delete.
 - **Add Flows:**
   - `AddLocationSheet`: Creates new containers.
-  - `Alerts`: Quick-add items via text prompt.
-  - `Hotspot Alert`: Captures (x,y) and names a new location in one step.
+  - `Hotspot Alert`: Visual creation of locations.
 
 ## Architecture Guardrails
 1.  **No Core Data/SwiftData in Views:** UI consumes only pure Swift structs.
@@ -52,5 +58,5 @@
 3.  **Local First:** All data lives in the App Sandbox (JSON + Images).
 
 ## Immediate Next Steps
-- **Search:** Implement global item search.
-- **Polish:** Add breadcrumbs and swipe actions.
+- **Export:** Export Inventory as CSV/JSON (Phase 4).
+- **Settings:** App-level settings page.

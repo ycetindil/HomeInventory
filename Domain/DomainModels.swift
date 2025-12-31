@@ -100,6 +100,27 @@ public enum LocationType: String, Codable, CaseIterable, Hashable {
     case shelf
     case zone
     case other
+    
+    public var iconName: String {
+        switch self {
+        case .room:
+            return "door.left.hand.closed"
+        case .shelf:
+            return "books.vertical"
+        case .bin:
+            return "shippingbox"
+        case .other:
+            return "folder"
+        case .house:
+            return "house.fill"
+        case .cabinet:
+            return "square.stack.3d.up.fill"
+        case .drawer:
+            return "tray.fill"
+        case .zone:
+            return "square.dashed"
+        }
+    }
 }
 
 // MARK: - Preview / Dev Seed Data
