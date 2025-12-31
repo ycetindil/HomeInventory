@@ -57,6 +57,15 @@
 2.  **Stable IDs:** Everything uses UUIDs.
 3.  **Local First:** All data lives in the App Sandbox (JSON + Images).
 
+## Decisions & Notes (Session Log)
+> Keep this short. Add bullets only when a decision changes scope/behavior/structure.
+
+### 2025-12-31
+- Decided to treat the Daily Bundle as the source of truth for end-of-day wrap-up.
+- Moved main screens under `UI/Screens/` (from `UI/View/`) to match folder conventions.
+- Standardized navigation destinations in `ContentView` for Location/Item/Settings routes.
+
+
 ## Immediate Next Steps
 - **Export:** Export Inventory as CSV/JSON (Phase 4).
 - **Settings:** App-level settings page.

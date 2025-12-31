@@ -53,41 +53,73 @@ We use three distinct systems to build this software. Respecting these roles pre
 I am working on "HomeInventory" (iOS/SwiftUI/Local-First) at public repo: https://github.com/ycetindil/HomeInventory
 
 Please read these files once to build full context:
-1. .cursorrules: https://raw.githubusercontent.com/ycetindil/HomeInventory/refs/heads/main/.cursorrules
-2. Docs/ARCHITECTURE.md: https://raw.githubusercontent.com/ycetindil/HomeInventory/refs/heads/main/Docs/ARCHITECTURE.md
-3. Docs/STATUS.md: https://raw.githubusercontent.com/ycetindil/HomeInventory/refs/heads/main/Docs/STATUS.md
-4. Docs/ROADMAP.md: https://raw.githubusercontent.com/ycetindil/HomeInventory/refs/heads/main/Docs/ROADMAP.md
+1) .cursorrules: https://raw.githubusercontent.com/ycetindil/HomeInventory/refs/heads/main/.cursorrules
+2) Docs/ARCHITECTURE.md: https://raw.githubusercontent.com/ycetindil/HomeInventory/refs/heads/main/Docs/ARCHITECTURE.md
+3) Docs/STATUS.md: https://raw.githubusercontent.com/ycetindil/HomeInventory/refs/heads/main/Docs/STATUS.md
+4) Docs/ROADMAP.md: https://raw.githubusercontent.com/ycetindil/HomeInventory/refs/heads/main/Docs/ROADMAP.md
 
 Act as my Architect.
 Goal: Produce the next ONE task spec (smallest valuable increment) based on ROADMAP "Next Up".
 
-WORKFLOW REQUIREMENT:
-At the end of the Cursor Spec, add a section "Commit checkpoints".
-- Define 1–3 checkpoints where the app should compile/run and I should commit.
-- Provide the exact commit messages (semantic where possible).
-- If the task includes file moves/renames, require an immediate checkpoint commit after the move.
+========================
+WORKFLOW COACHING (CRITICAL)
+========================
+You must act as a lightweight workflow coach to prevent context loss.
 
-SCOPE RULES:
-- Prefer changes that touch ≤ 3 files total.
+During the session, I will use these triggers:
+- "COMMIT: <slice done summary>"
+- "DECISION: <decision summary>"
+
+When I write "COMMIT:", you MUST respond with ONLY:
+1) "COMMIT NOW" or "NO COMMIT YET" (choose one)
+2) ONE suggested commit message in this format: type(scope): summary
+3) (Optional, 1 line max) what I should quickly sanity-check in the simulator before committing
+No extra commentary.
+
+When I write "DECISION:", you MUST respond with ONLY:
+1) One bullet to add under Docs/STATUS.md → "Decisions & Notes (Session Log)" using today's date
+2) If the decision changes ROADMAP or ARCHITECTURE, say exactly what to update in ONE sentence
+No extra commentary.
+
+While creating the Cursor Spec:
+- Break the work into 1–3 "Slices" (A/B/C). Each slice must be runnable/compilable.
+- At the end of each slice include a "COMMIT checkpoint" with an exact commit message.
+- If any file is moved/renamed, require an immediate COMMIT checkpoint right after the move/rename.
+
+========================
+SCOPE RULES
+========================
+- Prefer changes that touch ≤ 3 files total (excluding new small component files).
 - Avoid refactors/re-architecture unless required for compilation.
 
-CRITICAL OUTPUT REQUIREMENTS:
+========================
+CRITICAL OUTPUT REQUIREMENTS
+========================
 - Output ONLY a single markdown code block titled "Cursor Spec". No text before or after.
-- Do NOT write implementation code (snippets allowed only as BEGIN_SWIFT/END_SWIFT plain text).
+- Do NOT write implementation code.
+  - Snippets are allowed ONLY if wrapped as plain text markers:
+    BEGIN_SWIFT
+    ...
+    END_SWIFT
 - Include "Target Files" with exact paths.
 - Include "⚠️ Cursor Actions" listing exactly which files I must @-attach in Cursor.
 - If more files are required than those listed, STOP and ask me to attach them—do not guess.
 - Include the exact ROADMAP item you selected (copy the bullet text).
 
-Spec sections:
+========================
+Cursor Spec format (REQUIRED SECTIONS)
+========================
 1) ⚠️ Cursor Actions (the @-mentions)
-2) Selected ROADMAP item
+2) Selected ROADMAP item (exact bullet text)
 3) Goal / user-visible behavior
 4) Target Files (exact paths)
-5) Step-by-step logic (pseudo-code)
-6) Acceptance criteria
-7) Verification steps (simulator steps)
-8) BEGIN_SWIFT … END_SWIFT (optional)
+5) Slices (A/B/C)
+   - For each slice:
+     - Step-by-step logic (pseudo-code)
+     - Acceptance criteria (what must be true)
+     - Verification steps (simulator steps)
+     - COMMIT checkpoint (exact commit message)
+6) BEGIN_SWIFT … END_SWIFT (optional; only for standard snippets)
 
 ---
 
@@ -102,34 +134,29 @@ This generates ONE file you can paste into the Architect chat.
 ```text
 I have finished the implementation for today.
 
-You must follow this output contract exactly.
+Inputs:
+- DAILY_BUNDLE.md (source of truth: includes docs snapshots + full diffs + commit patches)
 
-SOURCE OF TRUTH:
-Use ONLY the pasted DAILY_BUNDLE.md below. Ignore chat history.
+Action:
+1) Update Docs/STATUS.md (only based on evidence from DAILY_BUNDLE).
+2) Update Docs/ROADMAP.md (check off items supported by evidence).
+3) Update Docs/ARCHITECTURE.md only if data model/core patterns changed; otherwise output: "No change needed".
+4) Generate ONE commit message: type(scope): summary
+5) Chat title: one line
 
-TASK:
-Update these files based on evidence in the bundle:
-1) Docs/STATUS.md
-2) Docs/ROADMAP.md
-3) Docs/ARCHITECTURE.md ONLY if needed; otherwise output "ARCHITECTURE: no change".
+EVIDENCE RULE:
+- If the Docs snapshots conflict with diffs/patches, trust the diffs/patches.
 
-HARD RULES:
-- Do NOT invent issues or claims.
-- Keep changes minimal and consistent with the current docs shown in the bundle.
-- Do not edit any other file.
-
-OUTPUT CONTRACT (DROP-IN READY FILES):
-1) Output the COMPLETE contents of Docs/STATUS.md inside ONE fenced markdown block.
-   - The first line inside the block must be: <!-- FILE: Docs/STATUS.md -->
-2) Output the COMPLETE contents of Docs/ROADMAP.md inside ONE fenced markdown block.
-   - The first line inside the block must be: <!-- FILE: Docs/ROADMAP.md -->
-3) For Docs/ARCHITECTURE.md:
-   - If changes are needed, output the COMPLETE contents inside ONE fenced markdown block with:
-     <!-- FILE: Docs/ARCHITECTURE.md -->
-   - Otherwise output exactly: ARCHITECTURE: no change
-4) Then output exactly two lines (no other text):
-COMMIT: <type(scope): summary>
-TITLE: <short title>
+OUTPUT REQUIREMENTS (STRICT):
+- Provide DROP-IN READY FULL CONTENTS for:
+  a) Docs/STATUS.md
+  b) Docs/ROADMAP.md
+  c) Docs/ARCHITECTURE.md (only if changed; else say "No change needed")
+- Then output:
+  - COMMIT: <one line>
+  - TITLE: <one line>
+- No extra commentary.
+- If you infer any decisions from the diffs/patches that are NOT already recorded in Docs/STATUS.md → Decisions & Notes, output a final section "MISSING DECISIONS" with suggested bullets (do not modify files with them).
 
 DAILY_BUNDLE.md:
-[PASTE .local/DAILY_BUNDLE.md HERE]
+[PASTE HERE]
